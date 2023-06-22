@@ -7,7 +7,7 @@ import { UserModule } from './user/user.module';
 import { TeamModule } from './team/team.module';
 import { Role, User } from './user/entities/user.entity';
 import { Team } from './team/entities/team.entity';
-
+// import { Request, Response } from "express";
 @Module({
   imports: [    ConfigModule.forRoot({
     isGlobal: true,// [REQUIRED if want to use env gloablly among all modules]
@@ -21,7 +21,7 @@ import { Team } from './team/entities/team.entity';
     database: process.env.DATABASE_NAME, 
     // synchronize:true,/
     autoLoadEntities:true,  
-    entities: [User,Team ,Role]
+    entities: []
   }), UserModule, TeamModule
   ],
  
