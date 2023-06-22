@@ -1,15 +1,17 @@
-import { Controller, Get, Post, Body, Patch, Param, Delete } from '@nestjs/common';
+import { Controller, Get, Post, Body, Patch, Param, Delete, Req, Res } from '@nestjs/common';
 import { TeamService } from './team.service';
 import { CreateTeamDto } from './dto/create-team.dto';
 import { UpdateTeamDto } from './dto/update-team.dto';
-
+import {Request,Response} from 'express'
 @Controller('team')
 export class TeamController {
   constructor(private readonly teamService: TeamService) {}
 
-  @Post()
-  create(@Body() createTeamDto: CreateTeamDto) {
-    return this.teamService.create(createTeamDto);
+  @Post('send')
+  create(@Req() req:Request,@Res() res:Response,@Body() createTeamDto: any) {
+  console.log('---------------');
+res.status(200).json({message:'success'})
+  return true
   }
 
   @Get()

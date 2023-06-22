@@ -21,7 +21,7 @@ import { Team } from './team/entities/team.entity';
     database: process.env.DATABASE_NAME, 
     // synchronize:true,/
     autoLoadEntities:true,  
-    entities: []
+    entities: [User,Role,Team]
   }), UserModule, TeamModule
   ],
  
