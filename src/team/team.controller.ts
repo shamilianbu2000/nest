@@ -2,22 +2,50 @@ import { Controller, Get, Post, Body, Patch, Param, Delete, Req, Res } from '@ne
 import { TeamService } from './team.service';
 import { CreateTeamDto } from './dto/create-team.dto';
 import { UpdateTeamDto } from './dto/update-team.dto';
-import {Request,Response} from 'express'
+import {Request,Response} from 'express';
 @Controller('team')
 export class TeamController {
   constructor(private readonly teamService: TeamService) {}
 
-  @Post('send')
-  create(@Req() req:Request,@Res() res:Response,@Body() createTeamDto: any) {
-  console.log('---------------');
-res.status(200).json({message:'success'})
-  return true
+  @Post('insert')
+  async create(@Req() req:Request,@Res() res:Response,@Body() createTeamDto: CreateTeamDto) {
+    try{
+      console.log("createUserDto",createTeamDto);
+      
+      await this.teamService.create(createTeamDto);
+
+      res.status(200).json({
+        message:'user created successfully'
+      })
+
+    }
+    catch(error){
+      console.log(error,"error");
+      res.status(500).json({
+        message:'sum think went wrong'
+      })
+    }
   }
 
-  @Get()
-  findAll() {
-    return this.teamService.findAll();
+  @Get('getRole')
+
+  async findAll(@Req() req:Request,@Res() res:Response) {
+  try{
+   
+      let role =await  this.teamService.findAll();
+      res.status(200).json({
+        message:'ok',
+        data:role
+      })
+    
+  }catch(error){
+    console.log(error,"error");
+    res.status(500).json({
+      message:'sum think went wrong'
+    })
   }
+}
+  
 
   @Get(':id')
   findOne(@Param('id') id: string) {

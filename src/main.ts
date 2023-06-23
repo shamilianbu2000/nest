@@ -22,7 +22,7 @@ async function bootstrap() {
     .addTag('CRUD')
     .build();
   const document = SwaggerModule.createDocument(app, config);
-  SwaggerModule.setup('api', app, document);
-  await app.listen(process.env.PORT);
+  SwaggerModule.setup('api-doc', app, document);
+  await app.listen(3000);
 }
 bootstrap();

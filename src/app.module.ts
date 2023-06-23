@@ -7,6 +7,7 @@ import { UserModule } from './user/user.module';
 import { TeamModule } from './team/team.module';
 import { Role, User } from './user/entities/user.entity';
 import { Team } from './team/entities/team.entity';
+
 // import { Request, Response } from "express";
 @Module({
   imports: [    ConfigModule.forRoot({
@@ -19,7 +20,7 @@ import { Team } from './team/entities/team.entity';
     username: process.env.DATABASE_USER, 
     password: process.env.DATABASE_PASSWORD, 
     database: process.env.DATABASE_NAME, 
-    // synchronize:true,/
+    // synchronize:true,
     autoLoadEntities:true,  
     entities: [User,Role,Team]
   }), UserModule, TeamModule
