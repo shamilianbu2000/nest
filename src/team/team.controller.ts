@@ -2,12 +2,8 @@ import { Controller, Get, Post, Body, Patch, Param, Delete, Req, Res, UseGuards 
 import { TeamService } from './team.service';
 import { CreateTeamDto } from './dto/create-team.dto';
 import { UpdateTeamDto } from './dto/update-team.dto';
-<<<<<<< HEAD
 import {Request,Response} from 'express'
 import { AuthGuard } from '@nestjs/passport';
-=======
-import {Request,Response} from 'express';
->>>>>>> 4ae854eb610f70d7eab1a4fb115d154a4653fa3e
 @Controller('team')
 @UseGuards(AuthGuard('jwt') )
 export class TeamController {

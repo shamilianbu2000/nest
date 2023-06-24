@@ -42,6 +42,7 @@ res.status(200).json({message:'success'})
         message:'sum think went wrong'
       })
     }
+  }
    
   
 
@@ -65,4 +66,13 @@ res.status(200).json({message:'success'})
     return this.userService.remove(+id);
   }
 }
+
+  function AuthGuard(arg0: string): any {
+    throw new Error('Function not implemented.');
+  }
+
+function UseGuards(arg0: any): (target: typeof UserController) => void | typeof UserController {
+  throw new Error('Function not implemented.');
+}
+
 
