@@ -1,14 +1,14 @@
-import { Controller, Get, Post, Body, Patch, Param, Delete, UseGuards, Req, Res } from '@nestjs/common';
+import { Controller, Get, Post, Body, Patch, Param, Delete, Req, Res } from '@nestjs/common';
 import { UserService } from './user.service';
 import { CreateUserDto } from './dto/create-user.dto';
 import { UpdateUserDto } from './dto/update-user.dto';
-import{Response,Request} from 'express'
-import { AuthGuard } from '@nestjs/passport';
 
+import{Response,Request} from 'express';
 @Controller('user')
 @UseGuards(AuthGuard('jwt') )
 
 export class UserController {
+  createUserDto: any;
   constructor(private readonly userService: UserService) {}
   @Post('send')
   creates(@Req() req:Request,@Res() res:Response,@Body() createTeamDto: any) {
@@ -17,10 +17,30 @@ res.status(200).json({message:'success'})
   return true
   }
   @Post('signUp')
-  create(@Req() req:Request,@Res() res:Response,@Body() createTeamDto: any)
+  created(@Req() req:Request,@Res() res:Response,@Body() createTeamDto: any)
    {  console.log('---------------');
   res.status(200).json({message:'success'})
     return true
+}
+
+  @Post('sign')
+   async create(@Body() createUserDto:any,@Req() req:Request,@Res() res:Response) {
+    try{
+      
+      console.log("createUserDto",createUserDto);
+      
+      await this.userService.create(createUserDto);
+
+      res.status(200).json({
+        message:'user created successfully'
+      })
+
+    }
+    catch(error){
+      console.log(error,"error");
+      res.status(500).json({
+        message:'sum think went wrong'
+      })
     }
    
   
