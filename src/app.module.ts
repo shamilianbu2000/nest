@@ -8,10 +8,12 @@ import { TeamModule } from './team/team.module';
 import { Role, User } from './user/entities/user.entity';
 import { Team } from './team/entities/team.entity';
 // import { Request, Response } from "express";
+import { JwtService } from './auth/jwt/jwt.service';
+import { JwtModule } from '@nestjs/jwt';
 @Module({
   imports: [    ConfigModule.forRoot({
     isGlobal: true,// [REQUIRED if want to use env gloablly among all modules]
-  }),  
+  }),  JwtModule.register({ secret: "dev",signOptions: { expiresIn: '60s'},}),
   TypeOrmModule.forRoot({
     type: 'mysql',
     host: process.env.DATABASE_HOST,
@@ -19,14 +21,15 @@ import { Team } from './team/entities/team.entity';
     username: process.env.DATABASE_USER, 
     password: process.env.DATABASE_PASSWORD, 
     database: process.env.DATABASE_NAME, 
-    // synchronize:true,/
+    // synchronize:true,
     autoLoadEntities:true,  
     entities: [User,Role,Team]
-  }), UserModule, TeamModule
+  }), UserModule, 
   ],
+  
  
   controllers: [AppController],
-  providers: [AppService],
+  providers: [AppService, JwtService],
 })
 export class AppModule {
 
